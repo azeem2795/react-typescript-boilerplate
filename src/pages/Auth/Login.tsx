@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, startTransition, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, startTransition, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login: FC = () => {
@@ -13,13 +13,13 @@ const Login: FC = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (): void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     console.log('Submitted');
+    e.preventDefault();
     startTransition(() => {
       localStorage.setItem('token', 'abc123456');
       navigate('/financial/config/chart-of-accounts', { replace: true });
     });
-    // setTimeout(() => {}, 2000);
   };
   return (
     <div className="login">
